@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ចំណេះដឹងឌីជីថល — Takeo Provincial Department of Posts and Telecommunications</title>
+<meta name="description" content="Takeo Provincial Department of Posts and Telecommunications. An official .gov.kh website providing public services, documents, news and digital knowledge for Takeo province.">
+<style>
+/* ==================================================================
+ * Cambodia Government Web Design System — global stylesheet
+ *
+ * Implements `design.md` (§66 custom properties, §3–§5 foundations and the
+ * §18–§46 component specifications). Inlined into every sample page by
+ * `scripts/build-sample-site.mjs` so each page is self-contained and works
+ * when opened directly from disk, with no build step or server.
+ *
+ * Every value here is traceable to a section of design.md; where the spec is
+ * silent, the conservative rule it recommends is used and noted.
+ * ================================================================== */
+
+/* ------------------------------ tokens (§66) ---------------------- */
+
+:root {
+  /* Brand */
+  --gov-primary: #1c4076;
+  --gov-primary-dark: #003194;
+  --gov-primary-deep: #002266;
+  --gov-navy: #003a8a;
+  --gov-secondary: #3da3cf;
+  --gov-link: #0f71bb;
+  --gov-highlight: #f07d03;
+
+  /* Semantic */
+  --gov-success: #0a8217;
+  --gov-warning: #f79009;
+  --gov-danger: #d7260f;
+  --gov-info: #0f71bb;
+
+  /* Neutral */
+  --gov-white: #ffffff;
+  --gov-gray-100: #f7f7f9;
+  --gov-gray-200: #e4e7ec;
+  --gov-gray-300: #d0d5dd;
+  --gov-gray-400: #98a2b3;
+  --gov-gray-500: #667085;
+  --gov-gray-600: #344054;
+  --gov-gray-700: #1d2939;
+  --gov-surface-soft: #f4f6fa;
+  --gov-pale-blue: #ebf1ff;
+  --gov-danger-soft: #fff4f3;
+
+  /* Typography (§3.2) */
+  --gov-font-sans: "Kantumruy Pro", "Open Sans", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --gov-text-sm: 0.875rem;
+  --gov-text-base: 1rem;
+  --gov-text-lg: 1.25rem;
+
+  --gov-h0: 3.5rem;
+  --gov-h1: 2.5rem;
+  --gov-h2: 2rem;
+  --gov-h3: 1.5rem;
+  --gov-h4: 1.125rem;
+  --gov-h5: 1rem;
+  --gov-h6: 1rem;
+
+  --gov-weight-light: 300;
+  --gov-weight-normal: 400;
+  --gov-weight-bold: 600;
+
+  --gov-leading-body: 2;
+  --gov-leading-sm: 1.75;
+  --gov-leading-lg: 2.25;
+  --gov-leading-heading: 1.2;
+
+  /* Spacing (§4) — 4px based */
+  --gov-space-1: 4px;
+  --gov-space-2: 8px;
+  --gov-space-3: 16px;
+  --gov-space-4: 24px;
+  --gov-space-5: 32px;
+  --gov-space-6: 40px;
+  --gov-space-7: 48px;
+  --gov-space-8: 56px;
+  --gov-space-9: 64px;
+  --gov-space-10: 80px;
+  --gov-space-11: 96px;
+  --gov-space-12: 128px;
+
+  /* Radius (§5.1) */
+  --gov-radius-xs: 4px;
+  --gov-radius-sm: 6px;
+  --gov-radius-md: 10px;
+  --gov-radius-lg: 12px;
+  --gov-radius-xl: 16px;
+  --gov-radius-pill: 999px;
+
+  /* Shadow (§5.3) */
+  --gov-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --gov-shadow-sm: 0 2px 8px rgba(16, 24, 40, 0.08);
+  --gov-shadow-md: 0 8px 20px rgba(16, 24, 40, 0.1);
+
+  /* Layout (§6.2) */
+  --gov-container: 1320px;
+  --gov-wrapper: 1440px;
+  --gov-reading: 760px;
+
+  /* NOT SPECIFIED in design.md (§8 gap 1): the spec defines no z-index scale.
+     These are the conservative values the document's components imply. */
+  --gov-z-header: 100;
+  --gov-z-dropdown: 200;
+  --gov-z-modal: 300;
+  --gov-z-toast: 400;
+}
+
+/* ------------------------------ reset ---------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--gov-font-sans);
+  font-size: var(--gov-text-base);
+  font-weight: var(--gov-weight-normal);
+  /* Khmer body text needs 1.8–2 (§3.2). Never crop glyphs with a fixed line box. */
+  line-height: var(--gov-leading-body);
+  color: var(--gov-gray-700);
+  background: var(--gov-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* §18/§72: never remove focus states. §56 focus ring. */
+:focus-visible {
+  outline: 3px solid rgba(15, 113, 187, 0.45);
+  outline-offset: 2px;
+}
+
+/* §69: no horizontal overflow at 320px. */
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* --------------------------- primitives -------------------------- */
+
+/* §6.2 global container */
+.gov-container {
+  width: min(100% - 32px, var(--gov-container));
+  margin-inline: auto;
+}
+
+.gov-wrapper {
+  max-width: var(--gov-wrapper);
+  margin-inline: auto;
+}
+
+/* §77 skip link — required but visually hidden until focused. */
+.gov-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--gov-z-toast);
+  background: var(--gov-primary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 0 0 var(--gov-radius-sm) 0;
+  text-decoration: none;
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-skip-link:focus {
+  left: 0;
+}
+
+/* §6.1 collapse point for the mobile navigation. */
+.gov-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* §4 section rhythm */
+.gov-section {
+  padding-block: 48px;
+}
+
+.gov-section--editorial {
+  padding-block: 64px 80px;
+}
+
+.gov-section--subtle {
+  background: var(--gov-gray-100);
+}
+
+.gov-section--soft {
+  background: var(--gov-surface-soft);
+}
+
+.gov-section--pale {
+  background: var(--gov-pale-blue);
+}
+
+.gov-section--primary {
+  background: var(--gov-primary);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .gov-section,
+  .gov-section--editorial {
+    padding-block: 24px 32px;
+  }
+}
+
+/* §17 Section header pattern */
+.gov-section-heading {
+  margin-bottom: 24px;
+}
+
+.gov-section-heading__eyebrow {
+  margin: 0 0 4px;
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.6;
+  color: var(--gov-primary);
+}
+
+.gov-section-heading__title {
+  margin: 0;
+  font-size: var(--gov-h2);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.35;
+  color: var(--gov-gray-700);
+}
+
+.gov-section-heading__description {
+  margin: 8px 0 0;
+  color: var(--gov-gray-600);
+  max-width: var(--gov-reading);
+}
+
+.gov-section-heading--with-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* §3.2 headings — 56/40/32/24/18/16/16 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 8px;
+  font-weight: var(--gov-weight-bold);
+  line-height: var(--gov-leading-heading);
+  color: var(--gov-gray-700);
+}
+
+.gov-h0 {
+  font-size: var(--gov-h0);
+}
+h1 {
+  font-size: var(--gov-h1);
+}
+h2 {
+  font-size: var(--gov-h2);
+}
+h3 {
+  font-size: var(--gov-h3);
+}
+h4 {
+  font-size: var(--gov-h4);
+}
+h5,
+h6 {
+  font-size: var(--gov-h5);
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+/* §19 links */
+a {
+  color: var(--gov-link);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--gov-highlight);
+}
+
+.gov-link-standalone {
+  font-weight: var(--gov-weight-bold);
+}
+
+/* §3.2 metadata */
+.gov-meta {
+  font-size: var(--gov-text-sm);
+  line-height: 1.6;
+  color: var(--gov-gray-500);
+}
+
+.gov-eyebrow {
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.6;
+  color: var(--gov-primary);
+}
+
+/* §5.2 borders / §5.3 elevation */
+.gov-card {
+  background: var(--gov-white);
+  border: 1px solid var(--gov-gray-200);
+  border-radius: var(--gov-radius-md);
+  padding: var(--gov-space-4);
+}
+
+.gov-card--soft {
+  background: var(--gov-surface-soft);
+  border: 0;
+}
+
+.gov-divider {
+  border: 0;
+  border-top: 1px solid var(--gov-gray-200);
+  margin: 0;
+}
+
+/* --------------------------- §8 trust bar ------------------------ */
+
+.gov-trust-bar {
+  background: var(--gov-gray-100);
+  color: var(--gov-gray-600);
+  font-size: var(--gov-text-sm);
+  border-bottom: 1px solid var(--gov-gray-200);
+  min-height: 36px;
+}
+
+.gov-trust-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-block: 6px;
+}
+
+.gov-trust-bar__message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.gov-trust-bar svg {
+  flex-shrink: 0;
+  color: var(--gov-primary);
+}
+
+.gov-trust-bar a {
+  color: var(--gov-primary);
+  font-weight: var(--gov-weight-bold);
+  /* §8: tap targets at least 44px, including on mobile. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ------------------------- §9/§80 header ------------------------- */
+
+.gov-header {
+  background: var(--gov-white);
+  border-bottom: 1px solid var(--gov-gray-200);
+}
+
+.gov-header__identity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 16px;
+  min-height: 80px;
+}
+
+.gov-agency {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gov-agency__emblem {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: var(--gov-radius-xs);
+  background: var(--gov-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: var(--gov-weight-bold);
+  font-size: 18px;
+  /* §9: preserve clear space; never distort the emblem. */
+}
+
+.gov-agency__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.gov-agency__name {
+  /* §9: 18–24px / 600 / 1.5; Khmer names must wrap naturally. */
+  font-size: 20px;
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.5;
+  color: var(--gov-primary);
+}
+
+.gov-agency__sub {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  line-height: 1.6;
+}
+
+.gov-header__utilities {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* §11 search */
+.gov-search {
+  display: flex;
+  width: 374px;
+  max-width: 100%;
+}
+
+.gov-search input {
+  flex: 1;
+  height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--gov-gray-300);
+  border-right: 0;
+  border-radius: var(--gov-radius-sm) 0 0 var(--gov-radius-sm);
+  background: var(--gov-white);
+  color: var(--gov-gray-700);
+  font: inherit;
+  font-size: var(--gov-text-base);
+}
+
+.gov-search input:focus {
+  border-color: var(--gov-primary);
+  outline: 3px solid rgba(28, 64, 118, 0.18);
+  outline-offset: 1px;
+}
+
+.gov-search button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 0 var(--gov-radius-sm) var(--gov-radius-sm) 0;
+  background: var(--gov-primary);
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+/* §12 language switcher — country markers are never the sole indicator. */
+.gov-lang {
+  display: inline-flex;
+  align-items: center;
+  min-width: 85px;
+  height: 44px;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--gov-gray-300);
+  border-radius: var(--gov-radius-md);
+  background: var(--gov-white);
+  color: var(--gov-gray-700);
+  font-size: var(--gov-text-sm);
+  text-decoration: none;
+  padding-inline: 12px;
+}
+
+.gov-lang:hover {
+  border-color: var(--gov-primary);
+  color: var(--gov-primary);
+}
+
+/* ------------------------ §10 primary nav ------------------------ */
+
+.gov-nav {
+  background: var(--gov-primary);
+}
+
+.gov-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gov-nav__link {
+  /* §10 */
+  display: flex;
+  align-items: center;
+  padding: 11px 23px;
+  min-height: 48px;
+  color: #fff;
+  font-weight: var(--gov-weight-normal);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+
+.gov-nav__link:hover {
+  background: var(--gov-primary-dark);
+  color: #fff;
+}
+
+/* §10: current page must not rely on colour alone — weight + border + aria-current. */
+.gov-nav__link[aria-current="page"] {
+  font-weight: var(--gov-weight-bold);
+  background: var(--gov-primary-deep);
+  border-bottom-color: var(--gov-highlight);
+}
+
+.gov-nav__toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--gov-gray-300);
+  border-radius: var(--gov-radius-md);
+  background: var(--gov-white);
+  color: var(--gov-gray-700);
+  font: inherit;
+  font-weight: var(--gov-weight-bold);
+  cursor: pointer;
+}
+
+/* §10/§80: collapse into a drawer below 992px. */
+@media (max-width: 991px) {
+  .gov-header__identity {
+    flex-wrap: wrap;
+  }
+  .gov-nav__toggle {
+    display: inline-flex;
+  }
+  .gov-nav__list {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+  }
+  .gov-nav__list[data-open="true"] {
+    display: flex;
+  }
+  .gov-nav__link {
+    border-bottom: 1px solid var(--gov-primary-dark);
+    border-left: 3px solid transparent;
+  }
+  .gov-nav__link[aria-current="page"] {
+    border-bottom-color: var(--gov-primary-dark);
+    border-left-color: var(--gov-highlight);
+  }
+  .gov-search {
+    width: 100%;
+    margin-block: 10px;
+  }
+}
+
+/* §13 breadcrumbs — wrap rather than scroll. */
+.gov-breadcrumbs {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  padding-block: 16px;
+}
+
+.gov-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gov-breadcrumbs li + li::before {
+  content: "/";
+  margin-right: 8px;
+  color: var(--gov-gray-400);
+}
+
+.gov-breadcrumbs a {
+  color: var(--gov-link);
+}
+
+.gov-breadcrumbs [aria-current="page"] {
+  color: var(--gov-gray-600);
+}
+
+/* --------------------------- §15 hero --------------------------- */
+
+.gov-hero {
+  position: relative;
+  background: var(--gov-primary-deep);
+  color: #fff;
+  overflow: hidden;
+}
+
+.gov-hero__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* §15 overlay — only to guarantee contrast, never for style alone. */
+.gov-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 34, 102, 0.85) 0%,
+    rgba(0, 34, 102, 0.45) 45%,
+    rgba(0, 34, 102, 0) 75%
+  );
+}
+
+.gov-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 40px;
+  align-items: center;
+  padding-block: 64px;
+  min-height: 380px;
+}
+
+.gov-hero__title {
+  /* §15 */
+  font-size: clamp(32px, 3.5vw, 56px);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.3;
+  color: #fff;
+  margin: 0 0 12px;
+}
+
+.gov-hero__text {
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 46ch;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 991px) {
+  .gov-hero__inner {
+    grid-template-columns: 1fr;
+    padding-block: 40px;
+  }
+  .gov-hero__title {
+    font-size: 32px;
+  }
+}
+
+/* §15 slide indicators */
+.gov-hero__dots {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 24px;
+  list-style: none;
+  margin: 0;
+}
+
+.gov-hero__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--gov-radius-pill);
+  border: 2px solid #fff;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.gov-hero__dot[aria-current="true"] {
+  background: #fff;
+}
+
+/* --------------------------- §18 buttons ------------------------- */
+
+.gov-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  /* §18 */
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--gov-radius-md);
+  font-family: inherit;
+  font-size: var(--gov-text-base);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.gov-btn--primary {
+  background: var(--gov-primary);
+  border-color: var(--gov-primary);
+  color: #fff;
+}
+
+.gov-btn--primary:hover {
+  background: var(--gov-primary-dark);
+  border-color: var(--gov-primary-dark);
+  color: #fff;
+}
+
+.gov-btn--primary:active {
+  background: var(--gov-primary-deep);
+  border-color: var(--gov-primary-deep);
+}
+
+.gov-btn--outline {
+  background: var(--gov-white);
+  border-color: var(--gov-primary);
+  color: var(--gov-primary);
+}
+
+.gov-btn--outline:hover {
+  background: var(--gov-pale-blue);
+  color: var(--gov-primary);
+}
+
+.gov-btn--on-primary {
+  background: var(--gov-white);
+  border-color: var(--gov-white);
+  color: var(--gov-primary);
+}
+
+.gov-btn--on-primary:hover {
+  background: var(--gov-pale-blue);
+  border-color: var(--gov-pale-blue);
+  color: var(--gov-primary-deep);
+}
+
+/* §18 link button for low-priority actions. */
+.gov-btn--link {
+  background: transparent;
+  border-color: transparent;
+  color: var(--gov-link);
+  padding-inline: 4px;
+}
+
+.gov-btn--link:hover {
+  color: var(--gov-highlight);
+}
+
+.gov-btn--danger {
+  background: var(--gov-danger);
+  border-color: var(--gov-danger);
+  color: #fff;
+}
+
+/* §18: disabled must not rely on opacity alone — pair it with a muted surface. */
+.gov-btn[disabled],
+.gov-btn[aria-disabled="true"] {
+  background: var(--gov-gray-200);
+  border-color: var(--gov-gray-200);
+  color: var(--gov-gray-500);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* §18: buttons may go full-width on phones for primary workflows. */
+@media (max-width: 575px) {
+  .gov-btn--block-sm {
+    width: 100%;
+  }
+}
+
+/* --------------------------- §20 cards -------------------------- */
+
+.gov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .gov-grid {
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gov-grid--editorial {
+    gap: 32px;
+  }
+}
+
+/* §20.3 action card */
+.gov-action-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--gov-white);
+  border: 1px solid var(--gov-gray-200);
+  border-radius: var(--gov-radius-md);
+  padding: var(--gov-space-4);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.gov-action-card:hover {
+  border-color: var(--gov-gray-300);
+  box-shadow: var(--gov-shadow-sm);
+  color: inherit;
+}
+
+.gov-action-card__title {
+  margin: 0;
+  font-size: var(--gov-h4);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.4;
+  color: var(--gov-gray-700);
+}
+
+.gov-action-card__text {
+  margin: 0;
+  color: var(--gov-gray-600);
+  line-height: var(--gov-leading-sm);
+}
+
+/* §21 public service card */
+.gov-service-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--gov-radius-md);
+  background: var(--gov-pale-blue);
+  color: var(--gov-primary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+.gov-service-card__action {
+  margin-top: auto;
+  padding-top: 12px;
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-primary);
+}
+
+/* §22 news card */
+.gov-news-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--gov-white);
+  border: 1px solid var(--gov-gray-200);
+  border-radius: var(--gov-radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.gov-news-card:hover {
+  box-shadow: var(--gov-shadow-sm);
+  border-color: var(--gov-gray-300);
+  color: inherit;
+}
+
+.gov-news-card__image {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--gov-gray-100);
+}
+
+.gov-news-card__body {
+  padding: var(--gov-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.gov-news-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--gov-text-sm);
+}
+
+.gov-news-card__category {
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-primary);
+}
+
+.gov-news-card__date {
+  color: var(--gov-gray-500);
+}
+
+.gov-news-card__title {
+  margin: 0;
+  /* §22: 18–20px / 600 / 1.5. Khmer titles may need taller cards — no clamp. */
+  font-size: 19px;
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.5;
+  color: var(--gov-gray-700);
+}
+
+.gov-news-card__excerpt {
+  margin: 0;
+  color: var(--gov-gray-600);
+  line-height: var(--gov-leading-sm);
+}
+
+/* §26 logo grid */
+.gov-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .gov-logo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .gov-logo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .gov-logo-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.gov-logo-card {
+  background: var(--gov-white);
+  border: 1px solid var(--gov-gray-200);
+  border-radius: var(--gov-radius-sm);
+  min-height: 112px;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--gov-gray-600);
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.5;
+}
+
+.gov-logo-card:hover {
+  border-color: var(--gov-primary);
+  color: var(--gov-primary);
+}
+
+/* §23 statistics */
+.gov-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 24px;
+}
+
+.gov-stat {
+  /* §23: dividers/whitespace, not heavy card borders. */
+  padding-left: 24px;
+  border-left: 2px solid var(--gov-gray-200);
+}
+
+.gov-stat__value {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: var(--gov-weight-bold);
+  line-height: 1.2;
+  color: var(--gov-primary);
+}
+
+.gov-stat__label {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gov-gray-600);
+}
+
+.gov-stat__note {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  line-height: 1.6;
+}
+
+/* §24 FAQ accordion */
+.gov-accordion {
+  border-top: 1px solid var(--gov-gray-200);
+}
+
+.gov-accordion__item {
+  border-bottom: 1px solid var(--gov-gray-200);
+}
+
+.gov-accordion__trigger {
+  width: 100%;
+  padding: 16px 0;
+  background: transparent;
+  border: 0;
+  color: var(--gov-gray-700);
+  font: inherit;
+  font-weight: var(--gov-weight-bold);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gov-accordion__item[open] > .gov-accordion__trigger,
+.gov-accordion__trigger[aria-expanded="true"] {
+  background: rgba(28, 64, 118, 0.05);
+}
+
+.gov-accordion__panel {
+  padding: 0 0 20px;
+  color: var(--gov-gray-600);
+  max-width: var(--gov-reading);
+}
+
+/* §25 CTA band */
+.gov-cta {
+  background: var(--gov-primary);
+  color: #fff;
+  border-radius: var(--gov-radius-lg);
+  padding: 40px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.gov-cta--subtle {
+  background: var(--gov-pale-blue);
+  color: var(--gov-gray-700);
+}
+
+.gov-cta__title {
+  color: inherit;
+  margin: 0 0 8px;
+}
+
+.gov-cta__text {
+  margin: 0;
+  color: inherit;
+  opacity: 0.92;
+  max-width: 62ch;
+}
+
+@media (max-width: 767px) {
+  .gov-cta {
+    padding: 24px;
+  }
+}
+
+/* §28 about split */
+.gov-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.gov-split--reverse {
+  grid-template-columns: 1fr 1.15fr;
+}
+
+@media (max-width: 991px) {
+  .gov-split,
+  .gov-split--reverse {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.gov-split__media img {
+  width: 100%;
+  border-radius: var(--gov-radius-md);
+  display: block;
+}
+
+/* §16 leadership message */
+.gov-leadership {
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.gov-leadership__portrait img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--gov-radius-md);
+  display: block;
+}
+
+.gov-leadership__signature {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gov-gray-200);
+}
+
+.gov-leadership__name {
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-gray-700);
+  margin: 0;
+}
+
+.gov-leadership__role {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .gov-leadership {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* §29 contact + map */
+.gov-contact-split {
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 991px) {
+  .gov-contact-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gov-contact-list {
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.gov-contact-list dt {
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-gray-500);
+}
+
+.gov-contact-list dd {
+  margin: 4px 0 0;
+  color: var(--gov-gray-700);
+}
+
+.gov-map {
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+  border-radius: var(--gov-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--gov-gray-200);
+  background: var(--gov-gray-100);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--gov-gray-600);
+}
+
+/* ---------------------------- §30 footer ------------------------ */
+
+.gov-footer {
+  background: var(--gov-primary);
+  color: #fff;
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+.gov-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 991px) {
+  .gov-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 575px) {
+  .gov-footer__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gov-footer__heading {
+  color: #fff;
+  font-size: var(--gov-text-base);
+  font-weight: var(--gov-weight-bold);
+  margin: 0 0 12px;
+}
+
+.gov-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gov-footer li {
+  line-height: var(--gov-leading-body);
+}
+
+.gov-footer a {
+  /* §30 */
+  color: var(--gov-gray-300);
+  text-decoration: none;
+}
+
+.gov-footer a:hover,
+.gov-footer a:focus {
+  color: var(--gov-highlight);
+  text-decoration: underline;
+}
+
+.gov-footer__bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-300);
+}
+
+/* ---------------------------- §31 forms ------------------------- */
+
+.gov-form {
+  display: grid;
+  gap: 20px;
+  max-width: 640px;
+}
+
+.gov-field {
+  display: grid;
+  gap: 8px;
+}
+
+.gov-field__label {
+  font-size: var(--gov-text-base);
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-gray-700);
+}
+
+.gov-field__required {
+  color: var(--gov-danger);
+}
+
+.gov-field input,
+.gov-field select,
+.gov-field textarea {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--gov-gray-400);
+  border-radius: var(--gov-radius-sm);
+  background: var(--gov-white);
+  color: var(--gov-gray-700);
+  font: inherit;
+  font-size: var(--gov-text-base);
+  width: 100%;
+}
+
+.gov-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.gov-field input:focus,
+.gov-field select:focus,
+.gov-field textarea:focus {
+  border-color: var(--gov-primary);
+  outline: 3px solid rgba(28, 64, 118, 0.18);
+  outline-offset: 1px;
+}
+
+.gov-field__help {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  margin: 0;
+}
+
+.gov-field__error {
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-danger);
+  margin: 0;
+}
+
+.gov-field--error input,
+.gov-field--error textarea,
+.gov-field--error select {
+  border-color: var(--gov-danger);
+}
+
+/* §32 checkbox / radio — native semantics, generous label target. */
+.gov-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding-block: 8px;
+  cursor: pointer;
+}
+
+.gov-check input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}
+
+/* §33 file upload */
+.gov-file {
+  border: 1px dashed var(--gov-gray-300);
+  border-radius: var(--gov-radius-md);
+  padding: 20px;
+  background: var(--gov-gray-100);
+  display: grid;
+  gap: 8px;
+}
+
+/* ---------------------------- §34 alerts ------------------------ */
+
+.gov-alert {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--gov-radius-sm);
+  border-left: 4px solid var(--gov-info);
+  background: var(--gov-pale-blue);
+  color: var(--gov-gray-700);
+}
+
+.gov-alert__title {
+  margin: 0 0 4px;
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-alert__text {
+  margin: 0;
+}
+
+.gov-alert--success {
+  border-left-color: var(--gov-success);
+  background: #f1faf2;
+}
+
+.gov-alert--warning {
+  border-left-color: var(--gov-warning);
+  background: #fff8ec;
+}
+
+.gov-alert--danger {
+  border-left-color: var(--gov-danger);
+  background: var(--gov-danger-soft);
+}
+
+/* --------------------------- §35 badges ------------------------- */
+
+.gov-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding-inline: 8px;
+  border-radius: var(--gov-radius-pill);
+  font-size: 13px;
+  font-weight: var(--gov-weight-bold);
+  background: var(--gov-gray-200);
+  color: var(--gov-gray-700);
+  white-space: nowrap;
+}
+
+.gov-badge--online,
+.gov-badge--success {
+  background: #e8f6ea;
+  color: #075c10;
+}
+
+.gov-badge--new,
+.gov-badge--info {
+  background: var(--gov-pale-blue);
+  color: var(--gov-primary-deep);
+}
+
+.gov-badge--closed,
+.gov-badge--danger {
+  background: var(--gov-danger-soft);
+  color: #96200c;
+}
+
+/* --------------------------- §36 tables ------------------------- */
+
+.gov-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gov-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.gov-table caption {
+  text-align: left;
+  font-weight: var(--gov-weight-bold);
+  padding-bottom: 12px;
+  color: var(--gov-gray-700);
+}
+
+.gov-table th,
+.gov-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--gov-gray-200);
+  vertical-align: top;
+}
+
+.gov-table th {
+  background: var(--gov-gray-100);
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-gray-700);
+}
+
+/* -------------------------- §37 pagination ---------------------- */
+
+.gov-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin: 32px 0 0;
+  list-style: none;
+}
+
+.gov-pagination a,
+.gov-pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 12px;
+  border: 1px solid var(--gov-gray-300);
+  border-radius: var(--gov-radius-sm);
+  color: var(--gov-gray-700);
+  text-decoration: none;
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-pagination a:hover {
+  border-color: var(--gov-primary);
+  color: var(--gov-primary);
+}
+
+.gov-pagination [aria-current="page"] {
+  background: var(--gov-primary);
+  border-color: var(--gov-primary);
+  color: #fff;
+}
+
+/* ------------------- §38 documents / downloads ------------------ */
+
+.gov-doc-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--gov-gray-200);
+}
+
+.gov-doc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gov-gray-200);
+}
+
+.gov-doc__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--gov-radius-sm);
+  background: var(--gov-danger-soft);
+  color: var(--gov-danger);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-doc__body {
+  flex: 1;
+  min-width: 200px;
+}
+
+.gov-doc__title {
+  margin: 0;
+  font-weight: var(--gov-weight-bold);
+  color: var(--gov-gray-700);
+}
+
+.gov-doc__meta {
+  font-size: var(--gov-text-sm);
+  color: var(--gov-gray-500);
+  margin: 2px 0 0;
+}
+
+/* §39 filter chips */
+.gov-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.gov-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding-inline: 16px;
+  border: 1px solid var(--gov-gray-300);
+  border-radius: var(--gov-radius-pill);
+  background: var(--gov-white);
+  color: var(--gov-gray-700);
+  text-decoration: none;
+  font-size: var(--gov-text-sm);
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-chip:hover {
+  border-color: var(--gov-primary);
+  color: var(--gov-primary);
+}
+
+.gov-chip[aria-current="true"] {
+  background: var(--gov-primary);
+  border-color: var(--gov-primary);
+  color: #fff;
+}
+
+/* §48 side navigation */
+.gov-with-sidebar {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 991px) {
+  .gov-with-sidebar {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.gov-side-nav {
+  position: sticky;
+  top: 24px;
+  border: 1px solid var(--gov-gray-200);
+  border-radius: var(--gov-radius-md);
+  padding: 16px;
+}
+
+.gov-side-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gov-side-nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--gov-radius-sm);
+  color: var(--gov-gray-700);
+  text-decoration: none;
+}
+
+.gov-side-nav a:hover {
+  background: var(--gov-gray-100);
+  color: var(--gov-primary);
+}
+
+.gov-side-nav [aria-current="page"] {
+  background: var(--gov-pale-blue);
+  color: var(--gov-primary);
+  font-weight: var(--gov-weight-bold);
+}
+
+@media (max-width: 991px) {
+  .gov-side-nav {
+    position: static;
+  }
+}
+
+/* §40 service detail: in-page contents */
+.gov-toc {
+  border-left: 3px solid var(--gov-gray-200);
+  padding-left: 16px;
+  margin-bottom: 32px;
+}
+
+.gov-toc ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.gov-toc a {
+  display: block;
+  padding: 6px 0;
+  color: var(--gov-link);
+}
+
+/* §51 stepper */
+.gov-stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  counter-reset: gov-step;
+}
+
+.gov-stepper li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gov-gray-500);
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-stepper li::before {
+  counter-increment: gov-step;
+  content: counter(gov-step);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--gov-radius-pill);
+  background: var(--gov-gray-200);
+  color: var(--gov-gray-600);
+  display: grid;
+  place-items: center;
+  font-size: var(--gov-text-sm);
+  flex-shrink: 0;
+}
+
+.gov-stepper li[aria-current="step"] {
+  color: var(--gov-primary);
+}
+
+.gov-stepper li[aria-current="step"]::before {
+  background: var(--gov-primary);
+  color: #fff;
+}
+
+/* §63 empty / loading / error states */
+.gov-state {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed var(--gov-gray-300);
+  border-radius: var(--gov-radius-md);
+  background: var(--gov-gray-100);
+}
+
+.gov-state__title {
+  margin: 0 0 8px;
+  font-size: var(--gov-h4);
+  font-weight: var(--gov-weight-bold);
+}
+
+.gov-state__text {
+  margin: 0 0 20px;
+  color: var(--gov-gray-600);
+}
+
+/* §64 404 */
+.gov-error-code {
+  font-size: 72px;
+  font-weight: var(--gov-weight-bold);
+  line-height: 1;
+  color: var(--gov-primary);
+  margin: 0 0 8px;
+}
+
+/* §57/§59 utility: readable measure for long-form content. */
+.gov-reading {
+  max-width: var(--gov-reading);
+}
+
+/* §55 motion: respect the user's preference. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* §65 print: preserve content, drop chrome. */
+@media print {
+  .gov-trust-bar,
+  .gov-nav,
+  .gov-header__utilities,
+  .gov-pagination,
+  .gov-cta,
+  .gov-side-nav,
+  .gov-skip-link {
+    display: none !important;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  .gov-footer {
+    background: #fff;
+    color: #000;
+    border-top: 1px solid #000;
+  }
+
+  .gov-footer a {
+    color: #000;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 12px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<a class="gov-skip-link" href="#main">Skip to main content</a>
+
+<!-- §8 Official government trust bar -->
+<div class="gov-trust-bar">
+  <div class="gov-container gov-trust-bar__inner">
+    <p class="gov-trust-bar__message">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z"/></svg>
+      This is an official government website. The address ends in <strong>.gov.kh</strong> and the connection is secure (HTTPS).
+    </p>
+    <a href="#main">Learn more<span class="gov-visually-hidden"> about secure government websites</span></a>
+  </div>
+</div>
+
+<!-- §9/§80 Agency header -->
+<header class="gov-header">
+  <div class="gov-container gov-header__identity">
+    <a class="gov-agency" href="index.html">
+      <span class="gov-agency__emblem" aria-hidden="true">មន្ទីរ</span>
+      <span class="gov-agency__text">
+        <span class="gov-agency__name">មន្ទីរប្រៃសណីយ៍ និងទូរគមនាគមន៍ខេត្តតាកែវ</span>
+        <span class="gov-agency__sub" lang="en">Takeo Provincial Department of Posts and Telecommunications</span>
+      </span>
+    </a>
+
+    <div class="gov-header__utilities">
+      <form class="gov-search" role="search" action="search.html" method="get">
+        <label class="gov-visually-hidden" for="site-search">Search this website</label>
+        <input id="site-search" name="q" type="search" placeholder="ស្វែងរកសេវា ឬឯកសារ…" autocomplete="off">
+        <button type="submit" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+      </form>
+
+      <!-- §12: language is shown as text, never as a country marker. Khmer is the
+           default. English is presented as unavailable rather than linked to a
+           page that does not exist — a broken language link is worse than a
+           clearly unavailable one. -->
+      <div class="gov-lang" role="group" aria-label="Language">
+        <span aria-current="true">ខ្មែរ</span>
+        <span aria-hidden="true">|</span>
+        <span lang="en" title="English version coming soon" style="opacity:.6;">EN</span>
+      </div>
+
+      <button class="gov-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        ម៉ឺនុយ
+      </button>
+    </div>
+  </div>
+
+  <!-- §10 Primary navigation -->
+  <nav class="gov-nav" aria-label="Primary">
+    <div class="gov-container">
+      <ul class="gov-nav__list" id="primary-nav" data-open="false">
+          <li><a class="gov-nav__link" href="about.html">អំពីយើង <span class="gov-visually-hidden">(About)</span></a></li>
+          <li><a class="gov-nav__link" href="services.html">សេវាសាធារណៈ <span class="gov-visually-hidden">(Public services)</span></a></li>
+          <li><a class="gov-nav__link" href="knowledge.html" aria-current="page">ចំណេះដឹងឌីជីថល <span class="gov-visually-hidden">(Digital knowledge)</span></a></li>
+          <li><a class="gov-nav__link" href="knowledge.html#documents">ឯកសារ <span class="gov-visually-hidden">(Documents)</span></a></li>
+          <li><a class="gov-nav__link" href="news.html">ព័ត៌មាន <span class="gov-visually-hidden">(News)</span></a></li>
+          <li><a class="gov-nav__link" href="faq.html">សំណួរញឹកញាប់ <span class="gov-visually-hidden">(FAQs)</span></a></li>
+          <li><a class="gov-nav__link" href="contact.html">ទំនាក់ទំនង <span class="gov-visually-hidden">(Contact)</span></a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+      <nav class="gov-breadcrumbs" aria-label="Breadcrumb">
+        <div class="gov-container">
+          <ol>
+            <li><a href="index.html">ទំព័រដើម</a></li>
+            <li aria-current="page">ចំណេះដឹងឌីជីថល</li>
+          </ol>
+        </div>
+      </nav>
+<main id="main">
+  <section class="gov-section">
+    <div class="gov-container">
+      <h1>ចំណេះដឹងឌីជីថល</h1>
+      <p class="gov-reading">ធនធានសិក្សាអំពីសុវត្ថិភាពអនឡាញ ការប្រើប្រាស់សេវាឌីជីថល និងជំនាញបច្ចេកវិទ្យាជាមូលដ្ឋាន។</p>
+
+      <ul class="gov-chips">
+        <li><a class="gov-chip" href="#" aria-current="true">ទាំងអស់</a></li>
+        <li><a class="gov-chip" href="#">សុវត្ថិភាពអនឡាញ</a></li>
+        <li><a class="gov-chip" href="#">សេវាឌីជីថល</a></li>
+        <li><a class="gov-chip" href="#">មគ្គុទ្ទេសក៍</a></li>
+      </ul>
+
+      <div class="gov-grid">
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សុវត្ថិភាពអនឡាញ</p>
+          <h3 class="gov-action-card__title">ការការពារព័ត៌មានផ្ទាល់ខ្លួនតាមអនឡាញ</h3>
+          <p class="gov-action-card__text">មគ្គុទ្ទេសក៍ · អាន ៦ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សេវាឌីជីថល</p>
+          <h3 class="gov-action-card__title">របៀបប្រើប្រាស់សេវាសាធារណៈអនឡាញ</h3>
+          <p class="gov-action-card__text">វីដេអូ · មើល ៤ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សុវត្ថិភាពអនឡាញ</p>
+          <h3 class="gov-action-card__title">ការទទួលស្គាល់អ៊ីមែលឆបោក</h3>
+          <p class="gov-action-card__text">អត្ថបទ · អាន ៤ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សុវត្ថិភាពអនឡាញ</p>
+          <h3 class="gov-action-card__title">ការការពារព័ត៌មានផ្ទាល់ខ្លួនតាមអនឡាញ</h3>
+          <p class="gov-action-card__text">មគ្គុទ្ទេសក៍ · អាន ៦ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សេវាឌីជីថល</p>
+          <h3 class="gov-action-card__title">របៀបប្រើប្រាស់សេវាសាធារណៈអនឡាញ</h3>
+          <p class="gov-action-card__text">វីដេអូ · មើល ៤ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+        <a class="gov-card gov-action-card" href="#">
+          <p class="gov-eyebrow" style="margin:0;">សុវត្ថិភាពអនឡាញ</p>
+          <h3 class="gov-action-card__title">ការទទួលស្គាល់អ៊ីមែលឆបោក</h3>
+          <p class="gov-action-card__text">អត្ថបទ · អាន ៤ នាទី</p>
+          <span class="gov-service-card__action">បើកធនធាន →</span>
+        </a>
+      </div>
+
+      <h2 id="documents" style="margin-top:48px;">ឯកសារ និងទម្រង់</h2>
+      <p class="gov-reading">ទម្រង់ និងឯកសារផ្លូវការសម្រាប់ទាញយក។</p>
+      <ul class="gov-doc-list">
+        <li class="gov-doc">
+          <span class="gov-doc__icon" aria-hidden="true">PDF</span>
+          <div class="gov-doc__body">
+            <p class="gov-doc__title">ទម្រង់ពាក្យសុំអាជ្ញាបណ្ណ</p>
+            <p class="gov-doc__meta">ការិយាល័យអាជ្ញាបណ្ណ · ធ្វើបច្ចុប្បន្នភាព 12/08/2026 · PDF · 0.4 MB</p>
+          </div>
+          <a class="gov-btn gov-btn--outline" href="#">ទាញយក PDF (0.4 MB)</a>
+        </li>
+        <li class="gov-doc">
+          <span class="gov-doc__icon" aria-hidden="true">PDF</span>
+          <div class="gov-doc__body">
+            <p class="gov-doc__title">មគ្គុទ្ទេសក៍សុវត្ថិភាពអនឡាញ</p>
+            <p class="gov-doc__meta">ការិយាល័យទូរគមនាគមន៍ · ធ្វើបច្ចុប្បន្នភាព 02/07/2026 · PDF · 1.1 MB</p>
+          </div>
+          <a class="gov-btn gov-btn--outline" href="#">ទាញយក PDF (1.1 MB)</a>
+        </li>
+        <li class="gov-doc">
+          <span class="gov-doc__icon" aria-hidden="true">XLS</span>
+          <div class="gov-doc__body">
+            <p class="gov-doc__title">បញ្ជីសេវាសាធារណៈ</p>
+            <p class="gov-doc__meta">ការិយាល័យរដ្ឋបាល · ធ្វើបច្ចុប្បន្នភាព 21/06/2026 · XLSX · 0.2 MB</p>
+          </div>
+          <a class="gov-btn gov-btn--outline" href="#">ទាញយក XLSX (0.2 MB)</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- §30 Government footer -->
+<footer class="gov-footer">
+  <div class="gov-container">
+    <div class="gov-footer__grid">
+      <div>
+        <h2 class="gov-footer__heading">មន្ទីរប្រៃសណីយ៍ និងទូរគមនាគមន៍ខេត្តតាកែវ</h2>
+        <ul>
+          <li>អាសយដ្ឋាន៖ ក្រុងតាកែវ ខេត្តតាកែវ កម្ពុជា</li>
+          <li>ទូរស័ព្ទ៖ <a href="tel:+855320000000">+855 32 000 000</a></li>
+          <li>អ៊ីមែល៖ <a href="mailto:info@takeo.gov.kh">info@takeo.gov.kh</a></li>
+          <li>ម៉ោងធ្វើការ៖ ចន្ទ–សុក្រ 08:00–17:00</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="gov-footer__heading">តំណភ្ជាប់សំខាន់</h2>
+        <ul>
+          <li><a href="services.html">សេវាសាធារណៈ</a></li>
+          <li><a href="knowledge.html">ចំណេះដឹងឌីជីថល</a></li>
+          <li><a href="news.html">ព័ត៌មាន</a></li>
+          <li><a href="faq.html">សំណួរញឹកញាប់</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="gov-footer__heading">ឯកសារ និងធនធាន</h2>
+        <ul>
+          <li><a href="knowledge.html#documents">ទាញយកឯកសារ</a></li>
+          <li><a href="services.html#online">សេវាអនឡាញ</a></li>
+          <li><a href="about.html">អំពីមន្ទីរ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="gov-footer__heading">វេទិកាពាក់ព័ន្ធ</h2>
+        <ul>
+          <li><a href="https://www.mptc.gov.kh" rel="noopener">ក្រសួងប្រៃសណីយ៍ និងទូរគមនាគមន៍</a></li>
+          <li><a href="https://www.cambodia.gov.kh" rel="noopener">រាជរដ្ឋាភិបាលកម្ពុជា</a></li>
+          <li><a href="https://www.takeo.gov.kh" rel="noopener">រដ្ឋបាលខេត្តតាកែវ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gov-footer__bottom">
+      <ul style="display:flex;gap:16px;flex-wrap:wrap;">
+        <li><a href="privacy.html">គោលការណ៍ភាពឯកជន</a></li>
+        <li><a href="terms.html">លក្ខខណ្ឌប្រើប្រាស់</a></li>
+      </ul>
+      <p style="margin:0;">© 2026 Takeo Provincial Department of Posts and Telecommunications. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* §10/§80 mobile navigation. Progressive enhancement only: the links exist and
+   work without this script, which merely toggles visibility. */
+(function () {
+  var toggle = document.querySelector(".gov-nav__toggle");
+  var list = document.getElementById("primary-nav");
+  if (!toggle || !list) return;
+  toggle.addEventListener("click", function () {
+    var open = list.getAttribute("data-open") === "true";
+    list.setAttribute("data-open", open ? "false" : "true");
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+})();
+</script>
+
+</body>
+</html>

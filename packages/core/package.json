@@ -1,0 +1,30 @@
+{
+  "name": "@rachana/core",
+  "version": "1.0.0",
+  "description": "Headless, host-agnostic core of Rachana Designer: the byte-preserving HTML patcher, document pipeline, CSS routing, WordPress conversion and the editor session. No DOM and no host APIs.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts": "./src/contracts/index.ts",
+    "./workspace": "./src/contracts/workspace.ts",
+    "./html": "./src/html/htmlPatcher.ts",
+    "./document": "./src/document/index.ts",
+    "./wordpress": "./src/wordpress/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "marked": "^17.0.4",
+    "turndown": "^7.2.2"
+  },
+  "devDependencies": {
+    "@types/turndown": "^5.0.6"
+  }
+}

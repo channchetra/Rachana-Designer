@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================================================================
+ * Rachana Designer — design tokens
+ *
+ * The editor shell is intentionally dark: the canvas it frames is the
+ * user's own (usually light) document, so a dark chrome keeps the
+ * document the visual focus. Brand hue is #1C4076.
+ * ================================================================== */
+
+:root {
+  --rd-brand: #1c4076;
+  --rd-brand-light: #2b5797;
+  --rd-accent: #26a5de;
+
+  --rd-shell-950: #0d1220;
+  --rd-shell-900: #121a2c;
+  --rd-shell-850: #161f33;
+  --rd-shell-800: #1b263d;
+  --rd-shell-700: #2a3752;
+  --rd-shell-600: #3a4867;
+
+  --rd-text: #e2e8f0;
+  --rd-text-dim: #94a3b8;
+  --rd-text-faint: #64748b;
+
+  --rd-border: rgba(255, 255, 255, 0.07);
+  --rd-border-strong: rgba(255, 255, 255, 0.13);
+
+  --rd-panel-w: 320px;
+  --rd-rail-w: 46px;
+
+  color-scheme: dark;
+}
+
+/* --------------------------- base --------------------------------- */
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-shell-950 text-slate-200 antialiased;
+  }
+
+  /* Slim, dark scrollbars so panels stay dense. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--rd-shell-700) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--rd-shell-700);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--rd-shell-600);
+    background-clip: content-box;
+  }
+
+  /* Native form controls inside panels follow the brand. */
+  input[type="range"] {
+    @apply h-1 w-full cursor-pointer appearance-none rounded-full bg-shell-700;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    @apply h-3 w-3 appearance-none rounded-full bg-accent-400;
+  }
+  input[type="checkbox"] {
+    accent-color: var(--rd-accent);
+  }
+  input[type="color"] {
+    @apply h-7 w-7 cursor-pointer rounded border border-white/10 bg-transparent p-0;
+  }
+  select,
+  input,
+  textarea {
+    font: inherit;
+  }
+}
+
+/* --------------------------- components --------------------------- */
+
+@layer components {
+  /* --- inputs --- */
+  .rd-input {
+    @apply w-full rounded-md border border-white/10 bg-black/30 px-2 py-1.5 text-[11px] text-slate-100
+      outline-none transition-colors placeholder:text-slate-500
+      focus:border-accent-500/70 focus:bg-black/45;
+  }
+
+  .rd-input-sm {
+    @apply rd-input px-1.5 py-1 text-[10px];
+  }
+
+  .rd-select {
+    @apply rd-input cursor-pointer appearance-none bg-black/30 pr-6;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%),
+      linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position: calc(100% - 11px) 50%, calc(100% - 7px) 50%;
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+  }
+
+  /* --- buttons --- */
+  .rd-btn {
+    @apply inline-flex select-none items-center justify-center gap-1.5 rounded-md border border-white/10
+      bg-white/[0.04] px-2.5 py-1.5 text-[11px] font-medium text-slate-200 transition-colors
+      hover:border-white/20 hover:bg-white/[0.09] active:bg-white/[0.13]
+      disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .rd-btn-primary {
+    @apply rd-btn border-brand-600/60 bg-brand-700 text-white hover:border-brand-500 hover:bg-brand-600;
+  }
+
+  .rd-btn-accent {
+    @apply rd-btn border-accent-500/50 bg-accent-600 text-white hover:bg-accent-500;
+  }
+
+  .rd-btn-ghost {
+    @apply rd-btn border-transparent bg-transparent hover:border-white/10 hover:bg-white/[0.06];
+  }
+
+  .rd-btn-danger {
+    @apply rd-btn border-red-500/30 bg-red-500/10 text-red-200 hover:bg-red-500/20;
+  }
+
+  .rd-icon-btn {
+    @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-transparent
+      text-slate-300 transition-colors hover:border-white/10 hover:bg-white/[0.08] hover:text-white
+      disabled:cursor-not-allowed disabled:opacity-35;
+  }
+
+  .rd-icon-btn-active {
+    @apply rd-icon-btn border-accent-500/40 bg-accent-500/15 text-accent-200;
+  }
+
+  /* --- surfaces --- */
+  .rd-panel {
+    @apply flex h-full flex-col overflow-hidden border-white/[0.07] bg-shell-900;
+  }
+
+  .rd-section {
+    @apply border-b border-white/[0.06] px-3 py-2.5;
+  }
+
+  .rd-section-title {
+    @apply mb-2 flex items-center justify-between gap-2 text-[10px] font-semibold uppercase
+      tracking-[0.08em] text-slate-400;
+  }
+
+  .rd-label {
+    @apply text-[10px] font-medium uppercase tracking-[0.06em] text-slate-400;
+  }
+
+  .rd-hint {
+    @apply text-[10px] leading-relaxed text-slate-500;
+  }
+
+  /* --- chips / tabs --- */
+  .rd-chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05]
+      px-2 py-0.5 text-[10px] font-medium text-slate-300 transition-colors hover:bg-white/[0.1];
+  }
+
+  .rd-chip-active {
+    @apply rd-chip border-accent-500/50 bg-accent-500/20 text-accent-100;
+  }
+
+  .rd-tab {
+    @apply flex-1 whitespace-nowrap rounded-md px-2 py-1.5 text-[10px] font-semibold uppercase
+      tracking-wide text-slate-400 transition-colors hover:bg-white/[0.06] hover:text-slate-200;
+  }
+
+  .rd-tab-active {
+    @apply rd-tab bg-brand-700/60 text-white shadow-brand;
+  }
+
+  /* --- modal --- */
+  .rd-modal-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm;
+  }
+
+  .rd-modal {
+    @apply flex max-h-[88vh] w-full flex-col overflow-hidden rounded-xl border border-white/10
+      bg-shell-900 shadow-panel animate-fade-in;
+  }
+
+  .rd-modal-header {
+    @apply flex shrink-0 items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-3;
+  }
+
+  /* --- misc --- */
+  .rd-divider {
+    @apply my-2 h-px bg-white/[0.06];
+  }
+
+  .rd-scroll {
+    @apply overflow-y-auto overflow-x-hidden;
+  }
+
+  .rd-badge {
+    @apply inline-flex items-center rounded border border-accent-500/40 bg-accent-500/15 px-1.5
+      py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-200;
+  }
+
+  .rd-kbd {
+    @apply rounded border border-white/15 bg-black/40 px-1 font-mono text-[9px] text-slate-300;
+  }
+}
+
+/* --------------------------- utilities ---------------------------- */
+
+@layer utilities {
+  .rd-no-drag {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  /* Removes the focus outline from mouse clicks while keeping keyboard focus. */
+  .rd-focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent-500/70 focus-visible:ring-offset-0;
+  }
+}

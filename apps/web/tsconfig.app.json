@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@rachana/core": ["../../packages/core/src/index.ts"],
+      "@rachana/core/*": ["../../packages/core/src/*"]
+    },
+    "types": ["vite/client", "node"],
+    "allowImportingTsExtensions": false
+  },
+  "include": ["src", "../../packages/core/src"]
+}

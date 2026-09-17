@@ -1,0 +1,38 @@
+{
+  "name": "rachana",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Rachana Designer — a visual editor for HTML, Markdown and Astro, shipped as a web app, a VS Code extension and a desktop app from one shared core.",
+  "type": "module",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@rachana/web",
+    "preview": "npm run preview --workspace=@rachana/web",
+    "build": "npm run build --workspace=@rachana/web",
+    "build:samples": "npm run build:samples --workspace=@rachana/web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "npm run test:e2e --workspace=@rachana/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "verify": "npm run typecheck && npm run test && npm run build",
+    "vscode:dev": "npm run dev --workspace=@rachana/vscode",
+    "vscode:package": "npm run package --workspace=@rachana/vscode",
+    "clean": "node scripts/clean-emitted-js.mjs",
+    "clean:check": "node scripts/clean-emitted-js.mjs --check"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^20.11.0",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.3.0",
+    "vitest": "^2.1.8"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true,
+    "esbuild@0.20.2": true
+  }
+}

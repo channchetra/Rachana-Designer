@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@rachana/core": ["../../packages/core/src/index.ts"],
+      "@rachana/core/contracts": ["../../packages/core/src/contracts/index.ts"],
+      "@rachana/core/workspace": ["../../packages/core/src/contracts/workspace.ts"],
+      "@rachana/core/html": ["../../packages/core/src/html/htmlPatcher.ts"],
+      "@rachana/core/wordpress": ["../../packages/core/src/wordpress/index.ts"],
+      "@rachana/core/*": ["../../packages/core/src/*"],
+      "@web/*": ["../web/src/*"],
+      "@/*": ["../web/src/*"]
+    }
+  },
+  "include": ["src"]
+}
